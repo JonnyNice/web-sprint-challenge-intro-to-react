@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-function Character() {
-
-    const [characters, setCharacters] = useState([]);
-
-    useEffect(()=>{
-        fetch('https://swapi.dev/api/people/')
-        .then((r)=>r.json())
-        .then(setCharacters);
-        console.log(characters)
-    }, []);
+function Character({ character }) {
 
     return (
         <div>
-            {characters.map((character)=>(
-                <div>
+            <div>
                 <li>{character.name}</li>
-                <ul>{character.height}</ul>
+                    <ul>Height: {character.height}</ul>
+                    <ul></ul>
                 </div>
-            ))}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import Character from './components/Character'
 
 const App = () => {
@@ -9,10 +9,21 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
 
+  const [characters, setCharacters] = useState([])
+
+  useEffect(()=>{
+    fetch('https://swapi.dev/api/people/')
+    .then((r)=>r.json())
+    .then(setCharacters);
+    console.log(characters)
+  }, []);
+
+  console.log(characters);
+
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
-      <Character />
+      {characters.map((character) => <Character character={character} />)}
     </div>
   );
 }
